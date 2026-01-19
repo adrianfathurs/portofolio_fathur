@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/portofolio-fathur/',
+  base: '/portofolio_fathur/',
   build: {
     outDir: 'dist'
   }

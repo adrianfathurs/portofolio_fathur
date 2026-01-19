@@ -41,6 +41,34 @@ const Projects = () => {
       ],
       tech: ['Vue JS', 'Pusher'],
       gradient: 'from-neon-blue to-neon-pink'
+    },
+    {
+      title: 'Coretax Bukpot Automation',
+      badge: 'Tool',
+      description: [
+        'Chrome extension for bulk download bukti potong from Coretax',
+        'Automates manual download process for hundreds of documents',
+        'Real-time progress tracking and activity logs',
+        'Configurable delays and auto-scroll features'
+      ],
+      tech: ['JavaScript', 'Chrome Extension', 'Manifest V3'],
+      gradient: 'from-neon-purple to-neon-blue',
+      link: '/downloads/coretax-bukpot-automation.zip',
+      linkLabel: 'Download Extension'
+    },
+    {
+      title: 'Coretax Bukpot PDF to Excel',
+      badge: 'Tool',
+      description: [
+        'Web-based tool to convert tax deduction proofs from PDF to Excel',
+        'Solves manual data entry problem for large volumes',
+        'Simple upload and download process',
+        'Saves hours of manual Excel entry work'
+      ],
+      tech: ['JavaScript', 'PDF Processing'],
+      gradient: 'from-neon-blue to-neon-purple',
+      link: 'https://adrianfathurs.github.io/coretax_bukpot_pdf_to_excel/',
+      linkLabel: 'Try Demo'
     }
   ]
 
@@ -81,7 +109,7 @@ const Projects = () => {
                     ))}
                   </ul>
 
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-4">
                     {project.tech.map((tech, i) => (
                       <span
                         key={i}
@@ -91,6 +119,20 @@ const Projects = () => {
                       </span>
                     ))}
                   </div>
+
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target={project.link.startsWith('http') ? '_blank' : undefined}
+                      rel={project.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-neon-blue to-neon-purple text-white text-sm font-semibold rounded-lg hover:opacity-90 transition-opacity"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                      </svg>
+                      {project.linkLabel}
+                    </a>
+                  )}
                 </div>
               </div>
             ))}

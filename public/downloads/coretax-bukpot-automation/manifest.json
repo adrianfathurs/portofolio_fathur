@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Coretax Bukpot Automation",
+  "version": "1.0.0",
+  "description": "Automation tool untuk bulk download bukti potong dari Coretax",
+  "permissions": [
+    "activeTab",
+    "downloads",
+    "storage",
+    "scripting",
+    "sidePanel"
+  ],
+  "host_permissions": [
+    "https://*.pajak.go.id/*",
+    "http://*.pajak.go.id/*"
+  ],
+  "action": {
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.pajak.go.id/*", "http://*.pajak.go.id/*"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  }
+}

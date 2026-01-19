@@ -1,0 +1,100 @@
+/**
+ * Content Script Styles
+ * Injected into Coretax pages
+ */
+
+/* Highlight rows being processed */
+.coretax-processing {
+  background: linear-gradient(90deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%) !important;
+  transition: background 0.3s ease;
+}
+
+.coretax-downloaded {
+  background: rgba(34, 197, 94, 0.1) !important;
+}
+
+.coretax-failed {
+  background: rgba(239, 68, 68, 0.1) !important;
+}
+
+/* Add indicator icon to download button */
+.coretax-download-status::after {
+  content: '✓';
+  display: inline-block;
+  margin-left: 8px;
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.coretax-download-failed::after {
+  content: '✗';
+  display: inline-block;
+  margin-left: 8px;
+  color: #ef4444;
+  font-weight: bold;
+}
+
+/* Floating status indicator */
+#coretax-status-indicator {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  min-width: 200px;
+}
+
+/* Watermark in status indicator */
+#coretax-status-indicator::after {
+  content: 'Idea by Wahyu Budi Lestari. Powered By AFS';
+  display: block;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #e2e8f0;
+  font-size: 9px;
+  color: #94a3b8;
+  font-style: italic;
+  text-align: center;
+  opacity: 0.7;
+}
+
+#coretax-status-indicator.running {
+  border-left: 4px solid #22c55e;
+}
+
+#coretax-status-indicator.error {
+  border-left: 4px solid #ef4444;
+}
+
+#coretax-status-indicator .status-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+#coretax-status-indicator .status-detail {
+  color: #64748b;
+  font-size: 12px;
+}
+
+#coretax-status-indicator .status-progress {
+  margin-top: 8px;
+  height: 4px;
+  background: #e2e8f0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+#coretax-status-indicator .status-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #2563eb, #22c55e);
+  transition: width 0.3s ease;
+}
