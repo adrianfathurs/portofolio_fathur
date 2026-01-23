@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Extension Icons</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .icon-preview {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #1d4ed8;
+        }
+        .instructions {
+            background: #f8fafc;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Coretax Automation - Icon Generator</h1>
+
+    <div class="instructions">
+        <h2>Cara Menggunakan:</h2>
+        <ol>
+            <li>Klik tombol "Generate Icons" di bawah</li>
+            <li>Klik kanan pada setiap icon → "Save image as..."</li>
+            <li>Simpan dengan nama:
+                <ul>
+                    <li>Small → <code>icon16.png</code></li>
+                    <li>Medium → <code>icon48.png</code></li>
+                    <li>Large → <code>icon128.png</code></li>
+                </ul>
+            </li>
+            <li>Simpan di folder <code>extension/icons/</code></li>
+        </ol>
+    </div>
+
+    <button onclick="generateIcons()">Generate Icons</button>
+
+    <div class="icon-preview">
+        <div>
+            <h3>16x16 (icon16.png)</h3>
+            <canvas id="icon16" width="16" height="16"></canvas>
+        </div>
+        <div>
+            <h3>48x48 (icon48.png)</h3>
+            <canvas id="icon48" width="48" height="48"></canvas>
+        </div>
+        <div>
+            <h3>128x128 (icon128.png)</h3>
+            <canvas id="icon128" width="128" height="128"></canvas>
+        </div>
+    </div>
+
+    <script>
+        function drawIcon(canvas, size) {
+            const ctx = canvas.getContext('2d');
+            const scale = size / 128;
+
+            ctx.scale(scale, scale);
+
+            // Background
+            ctx.fillStyle = '#2563eb';
+            ctx.beginPath();
+            ctx.roundRect(0, 0, 128, 128, 20);
+            ctx.fill();
+
+            // Document
+            ctx.fillStyle = 'white';
+            ctx.globalAlpha = 0.9;
+            ctx.beginPath();
+            ctx.roundRect(35, 25, 58, 78, 4);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+
+            // Download arrow
+            ctx.strokeStyle = '#2563eb';
+            ctx.lineWidth = 4;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.beginPath();
+            ctx.moveTo(64, 45);
+            ctx.lineTo(64, 75);
+            ctx.moveTo(50, 61);
+            ctx.lineTo(64, 75);
+            ctx.lineTo(78, 61);
+            ctx.stroke();
+
+            // Base line
+            ctx.beginPath();
+            ctx.moveTo(50, 82);
+            ctx.lineTo(78, 82);
+            ctx.stroke();
+
+            // Status dot
+            ctx.fillStyle = '#22c55e';
+            ctx.beginPath();
+            ctx.arc(64, 95, 8, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function generateIcons() {
+            ['icon16', 'icon48', 'icon128'].forEach(id => {
+                const size = parseInt(id.replace('icon', ''));
+                const canvas = document.getElementById(id);
+                drawIcon(canvas, size);
+            });
+            alert('Icons generated! Right-click each icon to save.');
+        }
+
+        // Auto-generate on load
+        window.onload = generateIcons;
+    </script>
+</body>
+</html>
