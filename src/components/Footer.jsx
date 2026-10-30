@@ -1,15 +1,15 @@
 const Footer = () => {
   return (
-    <footer className="py-8 bg-dark-bg border-t border-gray-800">
+    <footer className="py-8 bg-background border-t border-surface">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <p className="text-gray-400">
+          <p className="text-muted font-inter leading-body">
             © 2025 Adrian Fathur Setyawan. Built with{' '}
-            <span className="text-neon-pink">❤</span> using{' '}
-            <span className="text-neon-blue font-semibold">React</span> &{' '}
-            <span className="text-neon-purple font-semibold">Tailwind CSS</span>
+            <span className="text-accent">❤</span> using{' '}
+            <span className="text-primary font-satoshi font-satoshi-medium">React</span> &{' '}
+            <span className="text-accent font-satoshi font-satoshi-medium">Tailwind CSS</span>
           </p>
-          <p className="text-gray-500 text-sm mt-2">
+          <p className="text-muted text-sm mt-2 italic font-inter leading-body">
             "Code is not just about functionality, it's about experience."
           </p>
         </div>

@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion'
+
 const Experience = () => {
   const experiences = [
     {
@@ -40,65 +42,89 @@ const Experience = () => {
   ]
 
   return (
-    <section id="experience" className="py-20 bg-dark-card">
+    <section id="experience" className="py-20 bg-surface bg-opacity-30">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto section-fade">
-          <h2 className="text-4xl font-bold mb-12 text-center text-gradient">Work Experience</h2>
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-section-title font-satoshi font-satoshi-semibold mb-12 text-center text-text">Work Experience</h2>
 
-          <div className="space-y-8">
-            {experiences.map((exp, index) => (
-              <div
-                key={index}
-                className={`relative pl-8 border-l-2 ${
-                  exp.highlight ? 'border-neon-blue' : 'border-gray-700'
-                } hover:border-neon-purple transition-all duration-300 group`}
-              >
-                <div
-                  className={`absolute -left-2 top-0 w-4 h-4 rounded-full ${
-                    exp.highlight ? 'bg-neon-blue animate-glow' : 'bg-gray-700 group-hover:bg-neon-purple'
-                  } transition-all duration-300`}
-                ></div>
+            <div className="relative">
+              {/* Timeline line */}
+              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-primary"></div>
 
-                <div className="bg-dark-bg p-6 rounded-xl card-glow border border-gray-800 group-hover:border-gray-700 transition-all duration-300">
-                  <div className="flex flex-wrap justify-between items-start mb-3">
-                    <div>
-                      <h3 className="text-xl font-bold text-gray-100">{exp.role}</h3>
-                      <p className={`text-lg ${exp.highlight ? 'text-neon-blue' : 'text-gray-400'}`}>
-                        {exp.company}
-                      </p>
-                    </div>
-                    <span className="text-sm text-gray-500 bg-dark-card px-3 py-1 rounded-full">
-                      {exp.period}
-                    </span>
-                  </div>
+              <div className="space-y-8">
+                {experiences.map((exp, index) => {
+                  const expId = `${exp.company}-${index}`
+                  return (
+                  <motion.div
+                    key={expId}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="relative pl-20"
+                  >
+                    {/* Timeline dot */}
+                    <div
+                      className={`absolute left-6 top-6 w-5 h-5 rounded-full border-4 ${
+                        exp.highlight
+                          ? 'bg-primary border-accent'
+                          : 'bg-surface border-primary'
+                      } transition-all duration-300`}
+                    ></div>
 
-                  <ul className="space-y-2 mb-4">
-                    {exp.description.map((item, i) => (
-                      <li key={i} className="text-gray-400 flex items-start gap-2">
-                        <svg className="w-5 h-5 text-neon-purple mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                        </svg>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {exp.tech.length > 0 && (
-                    <div className="flex flex-wrap gap-2">
-                      {exp.tech.map((tech, i) => (
-                        <span
-                          key={i}
-                          className="px-3 py-1 bg-gradient-to-r from-neon-blue/20 to-neon-purple/20 text-neon-blue text-sm rounded-full border border-neon-blue/30"
-                        >
-                          {tech}
+                    {/* Experience card */}
+                    <div className="bg-background bg-opacity-70 backdrop-blur-glass p-6 rounded-card border border-surface transition-all duration-300 hover:translate-y-[-8px] hover:shadow-md">
+                      <div className="flex flex-wrap justify-between items-start mb-4">
+                        <div>
+                          <h3 className="text-card-title font-satoshi font-satoshi-medium text-text">{exp.role}</h3>
+                          <p className={`text-lg ${exp.highlight ? 'text-primary font-satoshi font-satoshi-medium' : 'text-muted'} font-inter`}>
+                            {exp.company}
+                          </p>
+                        </div>
+                        <span className="text-sm text-muted bg-surface px-4 py-1.5 rounded-full">
+                          {exp.period}
                         </span>
-                      ))}
+                      </div>
+
+                      <ul className="space-y-2 mb-4">
+                        {exp.description.map((item, i) => {
+                          const itemId = `${exp.company}-${i}`
+                          return (
+                          <li key={itemId} className="text-text flex items-start gap-2">
+                            <svg className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                            </svg>
+                            {item}
+                          </li>
+                          )
+                        })}
+                      </ul>
+
+                      {exp.tech.length > 0 && (
+                        <div className="flex flex-wrap gap-2">
+                          {exp.tech.map((tech) => (
+                            <span
+                              key={tech}
+                              className="px-3 py-1 bg-primary bg-opacity-10 text-primary text-sm rounded-full border border-primary border-opacity-30 font-geist-mono font-geist-mono-medium"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
+                  </motion.div>
+                )
+                })}
               </div>
-            ))}
-          </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

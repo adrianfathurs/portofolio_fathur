@@ -4,19 +4,24 @@
 
 @layer base {
   body {
-    @apply bg-dark-bg text-gray-100;
+    @apply bg-background text-text font-inter;
+  }
+
+  /* Typography base styles */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-satoshi;
+  }
+
+  p {
+    @apply leading-body;
+  }
+
+  ::selection {
+    @apply bg-primary/40 text-white;
   }
 }
 
 @layer utilities {
-  .text-gradient {
-    @apply bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink bg-clip-text text-transparent;
-  }
-
-  .card-glow {
-    @apply transition-all duration-300 hover:shadow-lg hover:shadow-neon-blue/20;
-  }
-
   .section-fade {
     animation: slideUp 0.6s ease-out;
   }
@@ -31,15 +36,79 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #0a0a0f;
+    background: #0A1330;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, #00f3ff, #bc13fe);
-    border-radius: 4px;
+    background: linear-gradient(to bottom, #5CD6F2, #2E5E8C);
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(to bottom, #bc13fe, #ff0099);
+    background: #8AE7FF;
+  }
+
+  /* HUD clipped corners (bevel) - card shape like reference image 1 */
+  .hud-clip {
+    clip-path: polygon(
+      0 0,
+      calc(100% - 22px) 0,
+      100% 22px,
+      100% 100%,
+      22px 100%,
+      0 calc(100% - 22px)
+    );
+  }
+
+  /* Smaller bevel for buttons & badges like reference image 2 */
+  .hud-clip-sm {
+    clip-path: polygon(
+      14px 0,
+      100% 0,
+      100% calc(100% - 14px),
+      calc(100% - 14px) 100%,
+      0 100%,
+      0 14px
+    );
+  }
+
+  /* Neon text glow */
+  .hud-glow-text {
+    text-shadow: 0 0 12px rgba(92, 214, 242, 0.6), 0 0 32px rgba(92, 214, 242, 0.25);
+  }
+
+  /* Outer neon glow for cards */
+  .hud-glow {
+    filter: drop-shadow(0 0 14px rgba(92, 214, 242, 0.25));
+  }
+}
+
+@layer components {
+  /* Full-screen HUD grid background - reference image 3 */
+  .hud-grid-bg {
+    background-color: #0A1330;
+    background-image:
+      /* soft ambient glows */
+      radial-gradient(ellipse 40% 30% at 20% 30%, rgba(46, 94, 140, 0.35), transparent 70%),
+      radial-gradient(ellipse 35% 40% at 80% 70%, rgba(46, 94, 140, 0.3), transparent 70%),
+      radial-gradient(ellipse 30% 25% at 60% 20%, rgba(38, 80, 120, 0.25), transparent 70%),
+      /* glowing intersection dots */
+      radial-gradient(circle, rgba(140, 231, 255, 0.95) 1.5px, transparent 2.5px),
+      /* grid lines */
+      linear-gradient(rgba(92, 214, 242, 0.14) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(92, 214, 242, 0.14) 1px, transparent 1px);
+    background-size:
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      56px 56px,
+      56px 56px,
+      56px 56px;
+    background-position:
+      0 0,
+      0 0,
+      0 0,
+      -1.5px -1.5px,
+      0 0,
+      0 0;
   }
 }
